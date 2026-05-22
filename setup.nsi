@@ -10,10 +10,7 @@ RequestExecutionLevel admin
 # ----------------------------------------
 # Visual Interface Customization Settings
 # ----------------------------------------
-# Change the external file icon and window header icon
 !define MUI_ICON "${__FILEDIR__}\app_icon.ico"
-
-# Define the custom branding graphic artwork files
 !define MUI_WELCOMEFINISHPAGE_BITMAP "${__FILEDIR__}\welcome_banner.bmp"
 !define MUI_HEADERIMAGE
 !define MUI_HEADERIMAGE_BITMAP "${__FILEDIR__}\top_header.bmp"
@@ -38,17 +35,22 @@ Section "Vista AuthUX (Required)" SecCore
     # This component cannot be unchecked by the user
     SectionIn RO 
     
-    SetOutPath "$INSTDIR"
+    # 1. Safely rename the original file to .old if it already exists
+    IfFileExists "$INSTDIR\AuthUX.dll" 0 +2
+    Rename "$INSTDIR\AuthUX.dll" "$INSTDIR\AuthUX.dll.old"
     
-    # Pack your primary screensaver file
+    # 2. Target the standard directory and extract your modified file
+    SetOutPath "$INSTDIR"
     File "${__FILEDIR__}\AuthUX.dll"
 SectionEnd
 
 Section "Optional Documentation" SecDocs
     # This component is optional and can be unchecked by the user
-    SetOutPath "$INSTDIR"
     
-    # Pack a secondary text readme file if you want
+    # 3. Change output target context to the live Installer folder instead of Program Files
+    SetOutPath "$EXEDIR"
+    
+    # Pack your secondary text readme file right next to the installer
     File "${__FILEDIR__}\readme.txt"
 SectionEnd
 
@@ -57,5 +59,5 @@ SectionEnd
 # ----------------------------------------
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
     !insertmacro MUI_DESCRIPTION_TEXT ${SecCore} "Copies the required system files to get a Vista login screen for AuthUX."
-    !insertmacro MUI_DESCRIPTION_TEXT ${SecDocs} "Copies user guides, patch notes, and help documents."
+    !insertmacro MUI_DESCRIPTION_TEXT ${SecDocs} "Copies user guides, patch notes, and help documents directly to the installer's location."
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
