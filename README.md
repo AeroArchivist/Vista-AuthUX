@@ -9,12 +9,11 @@ However I made a Vista editon for AuthUX, I took AuthUX.dll and replaced it's lo
 ## Manual Installation
 > [!WARNING]
 > Please go through this route **ONLY** if the standard installer does not work, as this way requires precision which could damage AuthUX if not done correctly.
-> AND MAKE A BACKUP OF THE ORIGINAL AUTHUX.DLL IN `C:\Program Files\AuthUX` !
 
-Download the Source code by clicking "Code" then "Download Zip", after downloading extract the zip and copy `AuthUX.dll`. Then go to `C:\Program Files\AuthUX` and paste the file, if Windows asks to overwrite then overwrite it, and then restart and enjoy your new Vista login screen!
+Download the Source code by clicking "Code" then "Download Zip", after downloading extract the zip and copy `AuthUX.dll`. Then go to `C:\Program Files\AuthUX` and rename the original AuthUX.dll to AuthUX.dll.old then paste your copied AuthUX.dll and done! (Restart recommended) now enjoy your new Vista login screen!
 
 ## Manual Uninstallation
-Copy your original AuthUX.dll and replace it with the current one in C:\Program Files\AuthUX and your login screen is reverted.
+Delete the modified AuthUX.dll you put and rename the old original AuthUX.dll.old to AuthUX.dll in C:\Program Files\AuthUX and your login screen is reverted.
 
 
 > [!NOTE]
